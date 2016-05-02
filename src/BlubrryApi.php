@@ -1,5 +1,8 @@
 <?php
 	/**
+	 * Author: Angelo Mandato <amandato@gmail.com>
+	 */
+	/**
 	 *
 	 * BlubrryApi - the base class
 	 *
