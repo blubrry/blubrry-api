@@ -205,8 +205,9 @@
 			curl_setopt($curl, CURLOPT_POST, 1);
 			if( count($files_array) > 0 )
 			{
-				while( list($key,$file) = each($files_array) )
+				foreach( $files_array as $key => $file ) {
 					$post_array[ $key ] = '@'.$file;
+				}
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $post_array );
 			}
 			else
@@ -271,7 +272,7 @@
 			// Return headers as an array here...
 			$headers = array();
 			$lines = explode("\n", $results);
-			while( list($null,$header) = each($lines) )
+			foreach( $lines as $null => $header )
 			{
 				if( preg_match('/([^:]*):(.*)/', $header, $matches) )
 					$headers[ strtolower(trim($matches[1])) ] = trim($matches[2]);
