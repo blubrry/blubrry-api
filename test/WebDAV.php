@@ -44,8 +44,19 @@ if( count($argv) > 1 )
                 $password = trim($argv[$x + 1]);
 
             }; break;
+			case '--help': {
+				printUsage();
+			}; break;
         }
     }
+}
+
+// Check for required parameters
+if( empty($program) || 
+		empty($file) ||
+		empty($username) ||
+		empty($password) ) {
+	printUsage();
 }
 
 require_once(dirname(dirname(__FILE__)).'/src/BlubrryApi.php'); //Includes the BlubrryApiOauth2 class
@@ -58,22 +69,22 @@ $api_test = new BlubrryApi();
 $api_test->setAuth($username, $password, CURLAUTH_BASIC);
 $api_test->put("https://api.blubrry.com/media/{$program}/{$file_name}",$file);
 
-//uncomment to see list
+//uncomment to see list of unpublished files
 //$result = $api_test->get("https://api.blubrry.com/media/{$program}/index.xml");
 
 
 if( $result )
-    LocalEcho("We have results!\n");
+    localEcho("We have results!\n");
 
 else if( !empty( $api_test->getError() ) )
-    LocalEcho($api_test->getError() ."\n");
+    localEcho($api_test->getError() ."\n");
 
 else if($api_test->getHTTPCode() == '201')
     echo "HTTP CODE: ". $api_test->getHTTPCode()." Upload Successful\n";
 
 else
-    LocalEcho("HTTP Error: ". $api_test->getHTTPCode() ."\n");
-LocalEcho("\n");
+    localEcho("HTTP Error: ". $api_test->getHTTPCode() ."\n");
+localEcho("\n");
 
 
 
@@ -83,11 +94,16 @@ LocalEcho("\n");
  * Displays the output
  * @param string $val - output
  */
-function LocalEcho($val)
-{
+function localEcho($val) {
     global $verbose, $localLog;
 
     if( $verbose )
         echo $val;
     $localLog .= $val;
+}
+
+function printUsage() {
+	echo "Usage:\n\n";
+	echo "php WebDAV.php --program-keyword your_show_keyword --username email@address.com --password accountpassword --file /path/to/file.mp3 --verbose\n\n";
+	exit;
 }
