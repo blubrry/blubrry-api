@@ -8,6 +8,7 @@
 	 *
  	*/
 
+
 	class BlubrryApi {
 		
 		var $m_error = '';
@@ -104,7 +105,7 @@
 		function setAuth($user, $password, $method = CURLAUTH_ANY)
 		{
 			$this->m_http_auth_info['user'] = $user;
-			$this->m_http_auth_info['password'] = $user;
+			$this->m_http_auth_info['password'] = $password;
 			$this->m_http_auth_info['method'] = $method;
 		}
 
@@ -208,6 +209,7 @@
 				foreach( $files_array as $key => $file ) {
 					$post_array[ $key ] = '@'.$file;
 				}
+
 				curl_setopt($curl, CURLOPT_POSTFIELDS, $post_array );
 			}
 			else
@@ -232,6 +234,7 @@
 		 */
 		function postString($url, $post_string, $content_type = '' )
 		{
+
 			if( !empty($content_type) )
 				$this->addCustomHeader('Content-Type: '.$content_type);
 				
@@ -376,6 +379,7 @@
 			{
 				curl_setopt($curl, CURLOPT_HTTPAUTH, $this->m_http_auth_info['method'] );
 				curl_setopt($curl, CURLOPT_USERPWD, $this->m_http_auth_info['user'] .':'. $this->m_http_auth_info['password'] );
+
 			}
 			
 			// Custom headers:
