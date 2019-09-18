@@ -52,7 +52,7 @@ if( count($argv) > 1 )
 if ( count($argv) == 10 )
 {
 	require_once(dirname(dirname(__FILE__)).'/src/BlubrryApiOauth2.php'); //Includes the BlubrryApiOauth2 class
-	$api_test = new BlubrryAPIOauth2('http://api.blubrry.local/oauth2/'); //Create an object of BlubrryOauth2
+	$api_test = new BlubrryAPIOauth2('https://api.blubrry.com/oauth2/'); //Create an object of BlubrryOauth2
 
 	LocalEcho("Processing Authorization Code: \n\n");
 

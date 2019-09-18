@@ -45,7 +45,7 @@ if( count($argv) == 8 )
 
 	require_once(dirname(dirname(__FILE__)).'/src/BlubrryApiOauth2.php'); //Includes the BlubrryApiOauth2 class
 
-	$api_test = new BlubrryAPIOauth2('http://api.blubrry.local/oauth2/'); //Create an object of BlubrryOauth2
+	$api_test = new BlubrryAPIOauth2('https://api.blubrry.com/oauth2/'); //Create an object of BlubrryOauth2
 	$api_test->setClient($client_id, $client_secret); //Sets the client credentials
 
 	$result = $api_test->refreshToken($refresh_token); //Returns a boolean for success or fail API call

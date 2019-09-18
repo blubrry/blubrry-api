@@ -19,7 +19,7 @@
  * Keep the client credentials
  * STEP 4: Generate Authorization Code for the registered client
  * Run RegisterClientAuthorizationCode.php in the command line using the parameters below
- * Parameters are: --verbose --client_id CLIENTID --client_secret CLIENTSECRET --code CODE
+ * Parameters are: --verbose --client_id CLIENTID --client_secret CLIENTSECRET --code CODE --redirect_uri http://localhost/
  */
 
 $localLog = '';
@@ -30,8 +30,7 @@ $client_secret='';
 $code = '';
 $redirect_uri = '';
 
-if( count($argv) == 10 )
-{
+
 	for( $x = 1; $x < count($argv); $x++ )
 	{
 		switch($argv[$x])
@@ -53,17 +52,19 @@ if( count($argv) == 10 )
 			}; break;
 		}
 	}
-
+	
 	LocalEcho("Processing Register Client Authorization Code: \n\n");
 
 	require_once(dirname(dirname(__FILE__)).'/src/BlubrryApiOauth2.php'); //Includes the BlubrryApiOauth2 class
 
-	$api_test = new BlubrryAPIOauth2('http://api.blubrry.local/oauth2/'); //Create an object of BlubrryOauth2
+	//$api_test = new BlubrryAPIOauth2('https://api.blubrry.com/oauth2/'); //Create an object of BlubrryOauth2
+	$api_test = new BlubrryAPIOauth2('https://api.blubrry.com/client/'); //Create an object of BlubrryOauth2
+	
 	$api_test->setClient($client_id, $client_secret); //Sets the client credentials
 
 	$result_code = $api_test->registerClientAuthorizationCode($code, $redirect_uri); //Gets the authorization code for the registered client
 
-	if( $result )
+	if( $result_code )
 		LocalEcho("We have results!\n");
 	else if( !empty( $api_test->getError() ) )
 		LocalEcho($api_test->getError() ."\n");
@@ -80,11 +81,7 @@ if( count($argv) == 10 )
 	}
 	else
 		LocalEcho("No json results available.\n");
-}
-else
-{
-	LocalEcho('Missing parameter');
-}
+
 
 /**
  * Displays the output

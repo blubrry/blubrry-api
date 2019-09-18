@@ -22,7 +22,7 @@ if( count($argv) > 1 )
 LocalEcho("Processing Issue Temporary Client: \n\n");
 
 require_once(dirname(dirname(__FILE__)).'/src/BlubrryApiOauth2.php'); //Includes the BlubrryApiOauth2 class
-$api_test = new BlubrryAPIOauth2('http://api.blubrry.local/client/'); //Creates an object of BlubrryApiOauth2
+$api_test = new BlubrryAPIOauth2('https://api.blubrry.com/client/'); //Creates an object of BlubrryApiOauth2
 
 $result = $api_test->issueTempClient(); //Issues temporary client credentials
 

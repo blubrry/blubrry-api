@@ -38,7 +38,7 @@ if ( count($argv) == 8 ) //Checks if all the parameters are entered
 
 	require_once(dirname(dirname(__FILE__)) . '/src/BlubrryApiOauth2.php'); //Includes the BlubrryApiOauth2 class
 
-	$api_test = new BlubrryAPIOauth2('http://api.blubrry.local/client/'); //Creates an object of BlubrryApiOauth2
+	$api_test = new BlubrryAPIOauth2('https://api.blubrry.com/client/'); //Creates an object of BlubrryApiOauth2
 	$api_test->setClient($temp_client_id, $temp_client_secret); //Sets the client credentials using the temporary client credentials
 
 	$result = $api_test->issueClient($code); //Issues client credentials
